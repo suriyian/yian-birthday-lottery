@@ -1,0 +1,447 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>老乡开脸 - 乡村活动页面</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', 'PingFang SC', 'Hiragino Sans GB', 'Microsoft YaHei', sans-serif;
+            background: linear-gradient(135deg, #e8f5e8 0%, #f0f8f0 50%, #e0f0e0 100%);
+            min-height: 100vh;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            position: relative;
+            overflow: hidden;
+        }
+
+        /* 背景竹叶装饰 */
+        .bamboo-leaf {
+            position: absolute;
+            opacity: 0.1;
+            pointer-events: none;
+        }
+
+        .bamboo-leaf-1 {
+            top: 10%;
+            right: 15%;
+            width: 120px;
+            height: 200px;
+            background: linear-gradient(45deg, #4a7c59 0%, #5d8a6b 100%);
+            border-radius: 0 50% 50% 0;
+            transform: rotate(25deg);
+        }
+
+        .bamboo-leaf-2 {
+            top: 20%;
+            right: 8%;
+            width: 80px;
+            height: 140px;
+            background: linear-gradient(45deg, #4a7c59 0%, #5d8a6b 100%);
+            border-radius: 0 50% 50% 0;
+            transform: rotate(15deg);
+        }
+
+        .bamboo-leaf-3 {
+            bottom: 15%;
+            left: 10%;
+            width: 100px;
+            height: 160px;
+            background: linear-gradient(45deg, #4a7c59 0%, #5d8a6b 100%);
+            border-radius: 50% 0 0 50%;
+            transform: rotate(-30deg);
+        }
+
+        /* 主容器 */
+        .container {
+            text-align: center;
+            z-index: 10;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        /* 3D角色容器 */
+        .character-container {
+            margin-bottom: 30px;
+            position: relative;
+        }
+
+        /* 3D角色 */
+        .character {
+            width: 180px;
+            height: 220px;
+            margin: 0 auto;
+            position: relative;
+            animation: float 3s ease-in-out infinite;
+        }
+
+        @keyframes float {
+            0%, 100% { transform: translateY(0px); }
+            50% { transform: translateY(-10px); }
+        }
+
+        /* 角色头部 */
+        .character-head {
+            width: 80px;
+            height: 80px;
+            background: linear-gradient(135deg, #fdbcb4 0%, #f4a6a0 100%);
+            border-radius: 50%;
+            margin: 0 auto 5px;
+            position: relative;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        /* 头发 */
+        .character-hair {
+            position: absolute;
+            top: -15px;
+            left: -10px;
+            width: 100px;
+            height: 60px;
+            background: linear-gradient(135deg, #8b4513 0%, #a0522d 100%);
+            border-radius: 50px 50px 30px 30px;
+            z-index: -1;
+        }
+
+        /* 眼睛 */
+        .character-eyes {
+            position: absolute;
+            top: 25px;
+            left: 50%;
+            transform: translateX(-50%);
+            display: flex;
+            gap: 15px;
+        }
+
+        .eye {
+            width: 8px;
+            height: 8px;
+            background: #333;
+            border-radius: 50%;
+        }
+
+        /* 嘴巴 */
+        .character-mouth {
+            position: absolute;
+            top: 45px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 20px;
+            height: 10px;
+            border: 2px solid #333;
+            border-top: none;
+            border-radius: 0 0 20px 20px;
+        }
+
+        /* 身体 */
+        .character-body {
+            width: 120px;
+            height: 80px;
+            background: linear-gradient(135deg, #2d5016 0%, #3d6b1f 100%);
+            margin: 0 auto;
+            border-radius: 15px;
+            position: relative;
+            box-shadow: 0 6px 20px rgba(0,0,0,0.15);
+        }
+
+        /* T恤文字 */
+        .shirt-text {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: white;
+            font-size: 12px;
+            font-weight: bold;
+            text-shadow: 1px 1px 2px rgba(0,0,0,0.3);
+        }
+
+        .shirt-underline {
+            width: 60px;
+            height: 2px;
+            background: #ffd700;
+            margin: 2px auto 0;
+        }
+
+        /* 手臂 */
+        .character-arms {
+            position: absolute;
+            top: 10px;
+            width: 100%;
+        }
+
+        .arm {
+            position: absolute;
+            width: 25px;
+            height: 50px;
+            background: linear-gradient(135deg, #fdbcb4 0%, #f4a6a0 100%);
+            border-radius: 15px;
+        }
+
+        .arm-left {
+            left: -15px;
+            transform: rotate(-20deg);
+        }
+
+        .arm-right {
+            right: -15px;
+            transform: rotate(20deg);
+        }
+
+        /* 主要内容卡片 */
+        .main-card {
+            background: rgba(255, 255, 255, 0.95);
+            border-radius: 25px;
+            padding: 35px 25px;
+            box-shadow: 0 15px 35px rgba(0,0,0,0.1);
+            backdrop-filter: blur(10px);
+            margin-bottom: 30px;
+            border: 1px solid rgba(255,255,255,0.2);
+        }
+
+        /* 欢迎文字 */
+        .welcome-text {
+            font-size: 18px;
+            color: #4a7c59;
+            margin-bottom: 15px;
+            font-weight: 500;
+        }
+
+        /* 主标题 */
+        .main-title {
+            font-size: 36px;
+            font-weight: bold;
+            color: #2d5016;
+            margin-bottom: 25px;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.1);
+            line-height: 1.2;
+        }
+
+        /* 副标题卡片 */
+        .subtitle-card {
+            background: linear-gradient(135deg, #fff8dc 0%, #f5e6a3 100%);
+            border-radius: 20px;
+            padding: 12px 20px;
+            display: inline-flex;
+            align-items: center;
+            gap: 8px;
+            font-size: 16px;
+            color: #8b4513;
+            font-weight: 500;
+            box-shadow: 0 4px 12px rgba(0,0,0,0.1);
+            border: 1px solid #f0d78c;
+        }
+
+        .fire-icon {
+            font-size: 18px;
+            animation: flicker 1.5s ease-in-out infinite alternate;
+        }
+
+        @keyframes flicker {
+            0% { transform: scale(1) rotate(-2deg); }
+            100% { transform: scale(1.1) rotate(2deg); }
+        }
+
+        /* 行动按钮 */
+        .action-button {
+            background: linear-gradient(135deg, #4a7c59 0%, #5d8a6b 100%);
+            color: white;
+            border: none;
+            border-radius: 25px;
+            padding: 18px 40px;
+            font-size: 18px;
+            font-weight: bold;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            box-shadow: 0 8px 20px rgba(74, 124, 89, 0.3);
+            text-decoration: none;
+            display: inline-block;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .action-button:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 25px rgba(74, 124, 89, 0.4);
+        }
+
+        .action-button:active {
+            transform: translateY(0);
+        }
+
+        /* 按钮光效 */
+        .action-button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(90deg, transparent, rgba(255,255,255,0.2), transparent);
+            transition: left 0.5s;
+        }
+
+        .action-button:hover::before {
+            left: 100%;
+        }
+
+        /* 响应式设计 */
+        @media (max-width: 480px) {
+            .container {
+                width: 95%;
+            }
+            
+            .main-title {
+                font-size: 28px;
+            }
+            
+            .welcome-text {
+                font-size: 16px;
+            }
+            
+            .subtitle-card {
+                font-size: 14px;
+                padding: 10px 16px;
+            }
+            
+            .action-button {
+                padding: 15px 35px;
+                font-size: 16px;
+            }
+            
+            .character {
+                width: 150px;
+                height: 180px;
+            }
+            
+            .character-head {
+                width: 65px;
+                height: 65px;
+            }
+            
+            .character-body {
+                width: 100px;
+                height: 65px;
+            }
+            
+            .shirt-text {
+                font-size: 10px;
+            }
+        }
+
+        /* 微动画效果 */
+        .main-card {
+            animation: slideUp 0.8s ease-out;
+        }
+
+        @keyframes slideUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        .action-button {
+            animation: slideUp 1s ease-out 0.3s both;
+        }
+    </style>
+</head>
+<body>
+    <!-- 背景竹叶装饰 -->
+    <div class="bamboo-leaf bamboo-leaf-1"></div>
+    <div class="bamboo-leaf bamboo-leaf-2"></div>
+    <div class="bamboo-leaf bamboo-leaf-3"></div>
+
+    <div class="container">
+        <!-- 3D角色 -->
+        <div class="character-container">
+            <div class="character">
+                <div class="character-head">
+                    <div class="character-hair"></div>
+                    <div class="character-eyes">
+                        <div class="eye"></div>
+                        <div class="eye"></div>
+                    </div>
+                    <div class="character-mouth"></div>
+                </div>
+                <div class="character-body">
+                    <div class="character-arms">
+                        <div class="arm arm-left"></div>
+                        <div class="arm arm-right"></div>
+                    </div>
+                    <div class="shirt-text">
+                        为村科技者
+                        <div class="shirt-underline"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 主要内容 -->
+        <div class="main-card">
+            <div class="welcome-text">老乡你好，欢迎参加</div>
+            <div class="main-title">老乡！开脸)</div>
+            <div class="subtitle-card">
+                说四川话，得熟情值 <span class="fire-icon">🔥</span>
+            </div>
+        </div>
+
+        <!-- 行动按钮 -->
+        <button class="action-button" onclick="joinActivity()">
+            立即登录参与活动
+        </button>
+    </div>
+
+    <script>
+        // 点击按钮交互
+        function joinActivity() {
+            const button = document.querySelector('.action-button');
+            button.style.transform = 'scale(0.95)';
+            button.textContent = '正在加入...';
+            
+            setTimeout(() => {
+                button.style.transform = 'scale(1)';
+                button.textContent = '欢迎加入！';
+                button.style.background = 'linear-gradient(135deg, #28a745 0%, #34ce57 100%)';
+            }, 500);
+            
+            setTimeout(() => {
+                button.textContent = '立即登录参与活动';
+                button.style.background = 'linear-gradient(135deg, #4a7c59 0%, #5d8a6b 100%)';
+            }, 2000);
+        }
+
+        // 添加页面加载动画
+        window.addEventListener('load', function() {
+            const character = document.querySelector('.character');
+            character.style.animation = 'float 3s ease-in-out infinite, slideUp 1s ease-out';
+        });
+
+        // 鼠标移动视差效果
+        document.addEventListener('mousemove', function(e) {
+            const leaves = document.querySelectorAll('.bamboo-leaf');
+            const mouseX = e.clientX / window.innerWidth;
+            const mouseY = e.clientY / window.innerHeight;
+            
+            leaves.forEach((leaf, index) => {
+                const speed = (index + 1) * 0.5;
+                const x = (mouseX - 0.5) * speed;
+                const y = (mouseY - 0.5) * speed;
+                leaf.style.transform += ` translate(${x}px, ${y}px)`;
+            });
+        });
+    </script>
+</body>
+</html>

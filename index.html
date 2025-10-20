@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Yian生日快乐 - 哈利波特抽奖</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+<body>
+    <div class="background">
+        <!-- 装饰元素 -->
+        <div class="decoration owl1"></div>
+        <div class="decoration owl2"></div>
+        <div class="decoration envelope1"></div>
+        <div class="decoration envelope2"></div>
+        <div class="decoration harry"></div>
+        <div class="decoration hermione"></div>
+        <div class="decoration ron"></div>
+    </div>
+
+    <div class="container">
+        <h1 class="title">🎉 Yian生日快乐 🎂</h1>
+
+        <div class="photo-grid" id="photoGrid">
+            <!-- 照片将通过JavaScript动态生成 -->
+        </div>
+
+        <div class="controls">
+            <button id="lotteryBtn" class="lottery-btn">🎲 开始抽奖</button>
+            <button id="resetBtn" class="reset-btn">🔄 重置抽奖</button>
+        </div>
+
+        <!-- 中奖结果显示区域 -->
+        <div class="winners-display" id="winnersDisplay">
+            <div class="winners-container" id="winnersContainer"></div>
+        </div>
+    </div>
+
+    <!-- 光标指示器 -->
+    <div class="cursor" id="cursor">✨</div>
+
+    <script src="script.js"></script>
+</body>
+</html>
