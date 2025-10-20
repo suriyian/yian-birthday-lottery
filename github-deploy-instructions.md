@@ -1,54 +1,81 @@
-# GitHub Pages 部署说明
+# 🚀 GitHub Pages 部署指南
 
-## 📋 准备文件清单
-您需要上传以下文件到 GitHub：
-- index.html
-- styles.css  
-- script.js
-- README.md
+## 📋 部署步骤
 
-## 🚀 部署步骤
-
-### 第一步：创建 GitHub 仓库
-1. 访问 https://github.com
-2. 点击右上角 "+" → "New repository"
-3. 仓库名建议：`shanzhi-mei-system` 或 `rural-form-system`
-4. 设置为 Public（公开）
-5. 勾选 "Add a README file"
+### 1. 创建GitHub仓库
+1. 登录 [GitHub.com](https://github.com)
+2. 点击右上角的 "+" 号，选择 "New repository"
+3. 仓库名称建议：`yian-birthday-lottery`
+4. 设置为 **Public**（GitHub Pages 免费版需要公开仓库）
+5. **不要**勾选 "Add a README file"（我们已经有了）
 6. 点击 "Create repository"
 
-### 第二步：上传文件
-1. 在新创建的仓库页面，点击 "uploading an existing file"
-2. 将以下4个文件拖拽到上传区域：
-   - index.html
-   - styles.css
-   - script.js
-   - README.md
-3. 在底部填写提交信息："添加善治美系统文件"
-4. 点击 "Commit changes"
+### 2. 推送代码到GitHub
+在终端中执行以下命令：
 
-### 第三步：启用 GitHub Pages
-1. 在仓库页面，点击 "Settings" 标签
-2. 在左侧菜单找到 "Pages"
-3. 在 "Source" 下拉菜单选择 "Deploy from a branch"
-4. 选择 "main" 分支
-5. 点击 "Save"
+```bash
+# 添加远程仓库（替换YOUR_USERNAME为您的GitHub用户名）
+git remote add origin https://github.com/YOUR_USERNAME/yian-birthday-lottery.git
 
-### 第四步：获取链接
-等待1-2分钟后，您会看到绿色提示：
-"Your site is published at https://您的用户名.github.io/仓库名"
+# 推送代码到GitHub
+git branch -M main
+git push -u origin main
+```
 
-## 🎯 最终结果
-- **永久链接**：https://您的用户名.github.io/仓库名
-- **完全免费**：GitHub Pages 永久免费
-- **HTTPS 加密**：自动提供安全连接
-- **全球访问**：CDN 加速，访问速度快
-- **版本控制**：可以随时更新内容
+### 3. 启用GitHub Pages
+1. 进入您的GitHub仓库页面
+2. 点击 "Settings" 选项卡
+3. 在左侧菜单中找到 "Pages"
+4. 在 "Source" 部分选择 "GitHub Actions"
+5. 保存设置
 
-## 📱 分享方式
-获得链接后，您可以：
-- 直接发送链接给同事查看
-- 生成二维码方便手机访问
-- 添加到邮件签名或文档中
+### 4. 等待部署完成
+- GitHub Actions 会自动构建和部署
+- 在 "Actions" 选项卡中可以查看部署进度
+- 部署完成后，您的网站将在以下地址可用：
+  ```
+  https://YOUR_USERNAME.github.io/yian-birthday-lottery/
+  ```
 
-这个链接将长期有效，非常适合产品展示和团队协作！
+## 🎯 快速部署命令
+
+如果您已经有GitHub账号，只需要执行：
+
+```bash
+# 1. 替换下面的YOUR_USERNAME为您的GitHub用户名
+git remote add origin https://github.com/YOUR_USERNAME/yian-birthday-lottery.git
+
+# 2. 推送到GitHub
+git branch -M main
+git push -u origin main
+```
+
+然后在GitHub仓库设置中启用Pages即可！
+
+## 📱 访问您的抽奖页面
+
+部署成功后，您可以通过以下方式访问：
+- **电脑浏览器**：直接访问GitHub Pages链接
+- **手机/平板**：同样的链接，响应式设计自动适配
+- **分享给朋友**：直接发送链接即可
+
+## 🔄 更新网站内容
+
+当您需要更换照片或修改内容时：
+1. 在本地修改文件
+2. 执行：
+   ```bash
+   git add .
+   git commit -m "更新照片和名单"
+   git push
+   ```
+3. GitHub会自动重新部署
+
+## 💡 小贴士
+
+- 部署通常需要1-5分钟
+- 确保仓库是Public的
+- 如果遇到问题，检查Actions页面的部署日志
+- 网站链接可以直接分享给参加派对的家长们
+
+祝Yian生日快乐！🎉
